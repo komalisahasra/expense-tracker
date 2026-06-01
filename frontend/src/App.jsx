@@ -2,7 +2,9 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import axios from 'axios';
 
 // ─── API ────────────────────────────────────────────────────────────────────
-const API_BASE = import.meta.env.VITE_BACKEND_URL || '/api';
+const API_BASE = import.meta.env.VITE_BACKEND_URL
+  ? new URL('/api', import.meta.env.VITE_BACKEND_URL).toString()
+  : '/api';
 const api = axios.create({ baseURL: API_BASE });
 api.interceptors.request.use(cfg => {
   const t = localStorage.getItem('token');
