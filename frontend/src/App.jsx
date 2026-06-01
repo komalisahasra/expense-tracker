@@ -2,7 +2,8 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import axios from 'axios';
 
 // ─── API ────────────────────────────────────────────────────────────────────
-const api = axios.create({ baseURL: '/api' });
+const API_BASE = import.meta.env.VITE_BACKEND_URL || '/api';
+const api = axios.create({ baseURL: API_BASE });
 api.interceptors.request.use(cfg => {
   const t = localStorage.getItem('token');
   if (t) cfg.headers.Authorization = `Bearer ${t}`;
